@@ -1,0 +1,40 @@
+#KMP算法的优化
+def get_next(t):
+    a=[0]*len(t)
+    a[0]=-1
+    k=-1
+    j=0
+    while j<len(t)-1:
+        if k==-1 or t[j]==t[k]:
+            j+=1
+            k+=1
+            if t[j]!=t[k]:
+              a[j]=k
+            else:
+              a[j]=a[k]
+        else:
+            k=a[k]
+    return a
+
+def kmp(s,t):
+    aa=get_next(t)
+    i=0
+    j=0
+    while i<len(s) and j<len(t):
+        if s[i]==t[j]:
+            i+=1
+            j+=1
+        else:
+            j=aa[j]
+            if j<0:
+                i+=1
+                j=0
+    if j==len(t):return i-len(t)
+    return -1
+print(get_next('12345'))
+print(get_next('11111'))
+print(get_next('121212'))
+print(kmp('aaaaaaabxxxy','aaab'))
+print(kmp('aaaaaaabxxxy','aaac'))
+print(kmp('kaaaaaaabxxxy','aaa'))
+print(kmp('aaaabaaac','aaac'))

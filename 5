@@ -1,0 +1,17 @@
+#KMP算法的实现
+def find(s,t):
+    p=0
+    while p<=len(s)-len(t):
+        i=p
+        j=0
+        while j<len(t):
+            if s[i]!=t[j]:break
+            i+=1
+            j+=1
+        else:
+            return p
+        p+=1
+    else:
+        return -1
+print(find('1234567','345'))
+print(find('1234567','567'))
